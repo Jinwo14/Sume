@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sume Entertainment - Stream Free Movies & TV Shows</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CSS RESET & VARIABLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        :root {
+            --bg-dark: #0f1015;
+            --bg-card: #181a20;
+            --bg-hover: #262932;
+            --accent-color: #ff2a55;
+            --accent-hover: #e02246;
+            --text-main: #ffffff;
+            --text-muted: #8c8f9a;
+            --nav-bg: rgba(15, 16, 21, 0.95);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            padding-bottom: 50px;
+        }
+
+        /* NAVIGATION BAR */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px 30px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 28px;
+        }
+
+        .search-bar {
+            position: relative;
+            width: 40%;
+            max-width: 500px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 16px 10px 42px;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            color: var(--text-main);
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .search-bar input:focus {
+            border-color: var(--accent-color);
+        }
+
+        .search-bar i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a.active, .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        /* HERO BANNER SLIDER */
+        .hero {
+            position: relative;
+            height: 70vh;
+            margin-top: 60px;
+            display: flex;
+            align-items: flex-end;
+            background: linear-gradient(to top, var(--bg-dark), transparent 80%), 
+                        url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1600&q=80') center/cover;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px 30px;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .hero-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .badge {
+            background: var(--accent-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .hero-desc {
+            max-width: 600px;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-hover);
+        }
+
+        /* CATEGORIES / FILTERS */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .filter-tags {
+            display: flex;
+            gap: 10px;
+            margin: 30px 0 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .tag {
+            padding: 8px 18px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            color: var(--text-muted);
+            transition: 0.3s;
+        }
+
+        .tag.active, .tag:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        /* MOVIE GRID */
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 30px 0 20px;
+        }
+
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .movie-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .poster-container {
+            position: relative;
+            width: 100%;
+            height: 260px;
+        }
+
+        .poster-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .quality-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 2px 6px;
+            font-size: 10px;
+            border-radius: 4px;
+            backdrop-filter: blur(4px);
+        }
+
+        .movie-info {
+            padding: 12px;
+        }
+
+        .movie-title {
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 6px;
+        }
+
+        .movie-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .rating {
+            color: #f1c40f;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* MODAL / PLAYER OVERLAY */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            width: 90%;
+            max-width: 850px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .video-container {
+            width: 100%;
+            height: 450px;
+            background: #000;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .modal-details {
+            padding: 20px;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px;
+            }
+            .search-bar {
+                display: none;
+            }
+            .hero {
+                height: 50vh;
+            }
+            .hero-title {
+                font-size: 28px;
+            }
+            .movie-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+                gap: 12px;
+            }
+            .poster-container {
+                height: 190px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-play-circle"></i>
+                <span>Sume Entertainment</span>
+            </a>
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" placeholder="Search movies, TV shows...">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">Movies</a></li>
+                <li><a href="#">TV Shows</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="heroSection">
+        <div class="hero-content">
+            <h1 class="hero-title" id="heroTitle">Avatar: The Way of Water</h1>
+            <div class="hero-meta">
+                <span class="badge">HD</span>
+                <span><i class="fa-solid fa-star" style="color: #f1c40f;"></i> 7.8</span>
+                <span>2022</span>
+                <span>3h 12m</span>
+                <span>Action, Sci-Fi</span>
+            </div>
+            <p class="hero-desc" id="heroDesc">
+                Jake Sully lives with his newfound family formed on the extrasolar moon Pandora. Once a familiar threat returns to finish what was previously started...
+            </p>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="openPlayer('https://www.youtube.com/embed/d9MyW72ELq0')">
+                    <i class="fa-solid fa-play"></i> Watch Now
+                </button>
+                <button class="btn btn-secondary">
+                    <i class="fa-solid fa-plus"></i> Add to List
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+        <!-- FILTER TAGS -->
+        <div class="filter-tags">
+            <div class="tag active" onclick="filterGenre('All')">All</div>
+            <div class="tag" onclick="filterGenre('Action')">Action</div>
+            <div class="tag" onclick="filterGenre('Sci-Fi')">Sci-Fi</div>
+            <div class="tag" onclick="filterGenre('Drama')">Drama</div>
+            <div class="tag" onclick="filterGenre('Comedy')">Comedy</div>
+            <div class="tag" onclick="filterGenre('Animation')">Animation</div>
+        </div>
+
+        <!-- MOVIES SECTION -->
+        <h2 class="section-title">Trending Now</h2>
+        <div class="movie-grid" id="movieGrid">
+            <!-- Movie cards will be inserted here by JavaScript -->
+        </div>
+    </main>
+
+    <!-- VIDEO MODAL -->
+    <div class="modal" id="videoModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closePlayer()">&times;</span>
+            <div class="video-container">
+                <iframe id="videoIframe" src="" allowfullscreen></iframe>
+            </div>
+            <div class="modal-details">
+                <h2 id="modalTitle">Movie Title</h2>
+                <p id="modalDesc" style="color: var(--text-muted); margin-top: 8px; font-size: 14px;"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Sample Movie Data
+        const movies = [
+            {
+                id: 1,
+                title: "Avatar: The Way of Water",
+                genre: "Sci-Fi",
+                rating: 7.8,
+                year: 2022,
+                quality: "4K",
+                poster: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=500&q=80",
+                trailer: "https://www.youtube.com/embed/d9MyW72ELq0",
+                description: "Jake Sully lives with his newfound family formed on the extrasolar moon Pandora."
+            },
+            {
+                id: 2,
+                title: "The Dark Knight",
+                genre: "Action",
+                rating: 9.0,
+                year: 2008,
+                quality: "HD",
+                poster: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=500&q=80",
+                trailer: "https://www.youtube.com/embed/EXeTwQWrcwY",
+                description: "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham."
+            },
+            {
+                id: 3,
+                title: "Interstellar",
+                genre: "Sci-Fi",
+                rating: 8.7,
+                year: 2014,
+                quality: "4K",
+                poster: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=500&q=80",
+                trailer: "https://www.youtube.com/embed/zSWdZVtXT7E",
+                description: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival."
+            },
+            {
+                id: 4,
+                title: "Cyberpunk City",
+                genre: "Action",
+                rating: 8.2,
+                year: 2023,
+                quality: "HD",
+                poster: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=500&q=80",
+                trailer: "https://www.youtube.com/embed/LembwKOiW8U",
+                description: "A thrilling ride through the neon-lit streets of a futuristic metropolis."
+            },
+            {
+                id: 5,
+                title: "Spirited Away",
+                genre: "Animation",
+                rating: 8.6,
+                year: 2001,
+                quality: "HD",
+                poster: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=500&q=80",
+                trailer: "https://www.youtube.com/embed/ByXuk9QqQkk",
+                description: "During her family's move to the suburbs, a 10-year-old girl wanders into a world ruled by gods and spirits."
+            },
+            {
+                id: 6,
+                title: "Joker",
+                genre: "Drama",
+                rating: 8.4,
+                year: 2019,
+                quality: "4K",
+                poster: "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=500&q=80",
+                trailer: "https://www.youtube.com/embed/zAGVQLHvwOY",
+                description: "A mentally troubled stand-up comedian embarks on a downward spiral that leads to the creation of an iconic villain."
+            }
+        ];
+
+        // Render Movie Cards
+        function displayMovies(data) {
+            const movieGrid = document.getElementById('movieGrid');
+            movieGrid.innerHTML = '';
+
+            if (data.length === 0) {
+                movieGrid.innerHTML = `<p style="color: var(--text-muted); grid-column: 1/-1;">No movies found.</p>`;
+                return;
+            }
+
+            data.forEach(movie => {
+                const card = document.createElement('div');
+                card.classList.add('movie-card');
+                card.onclick = () => openPlayer(movie.trailer, movie.title, movie.description);
+
+                card.innerHTML = `
+                    <div class="poster-container">
+                        <img src="${movie.poster}" alt="${movie.title}">
+                        <span class="quality-badge">${movie.quality}</span>
+                    </div>
+                    <div class="movie-info">
+                        <div class="movie-title">${movie.title}</div>
+                        <div class="movie-details">
+                            <span>${movie.year} • ${movie.genre}</span>
+                            <span class="rating"><i class="fa-solid fa-star"></i> ${movie.rating}</span>
+                        </div>
+                    </div>
+                `;
+                movieGrid.appendChild(card);
+            });
+        }
+
+        // Filter Movies by Genre
+        function filterGenre(genre) {
+            document.querySelectorAll('.tag').forEach(tag => {
+                tag.classList.remove('active');
+                if (tag.innerText === genre) tag.classList.add('active');
+            });
+
+            if (genre === 'All') {
+                displayMovies(movies);
+            } else {
+                const filtered = movies.filter(m => m.genre === genre);
+                displayMovies(filtered);
+            }
+        }
+
+        // Search Filter
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filtered = movies.filter(movie => 
+                movie.title.toLowerCase().includes(searchTerm) || 
+                movie.genre.toLowerCase().includes(searchTerm)
+            );
+            displayMovies(filtered);
+        });
+
+        // Video Modal Control
+        function openPlayer(trailerUrl, title = 'Avatar: The Way of Water', desc = '') {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('videoIframe');
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalDesc').innerText = desc;
+            
+            iframe.src = trailerUrl + "?autoplay=1";
+            modal.style.display = 'flex';
+        }
+
+        function closePlayer() {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('videoIframe');
+            iframe.src = '';
+            modal.style.display = 'none';
+        }
+
+        // Initialize display
+        displayMovies(movies);
+    </script>
+</body>
+</html>
