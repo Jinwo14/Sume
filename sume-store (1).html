@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0d12" />
+  <meta name="description" content="Sume Entertainment - movie trailers, original movies, PlayStation games, monitors, external drives and accessories." />
+  <title>Sume Entertainment | Movies, Games & Tech</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+    :root{
+      --bg:#0b0d12;--surface:#121722;--surface2:#191f2c;--text:#f7f9fc;--muted:#9aa6b8;
+      --line:rgba(255,255,255,.09);--accent:#ff315f;--accent2:#7c5cff;--good:#1ec98f;
+      --shadow:0 18px 50px rgba(0,0,0,.28);--nav:rgba(11,13,18,.88)
+    }
+    html[data-theme="light"]{
+      --bg:#f5f7fb;--surface:#ffffff;--surface2:#edf1f7;--text:#131722;--muted:#667085;
+      --line:rgba(16,24,40,.10);--accent:#e92050;--accent2:#6547e8;--good:#068a62;
+      --shadow:0 16px 40px rgba(16,24,40,.10);--nav:rgba(245,247,251,.90)
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:.25s;background-color:var(--bg)}
+    a{color:inherit;text-decoration:none} button,input{font:inherit} button{border:0}
+    .wrap{width:min(1180px,calc(100% - 28px));margin:auto}
+
+    header{position:sticky;top:0;z-index:1000;background:var(--nav);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+    .nav{height:64px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:-.5px}
+    .brand-mark{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:var(--shadow)}
+    .brand small{display:block;color:var(--muted);font-weight:700;font-size:10px;letter-spacing:.3px;margin-top:-2px}
+    .nav-actions{display:flex;align-items:center;gap:8px}
+    .icon-btn,.pill-btn{height:40px;border-radius:12px;background:var(--surface2);color:var(--text);cursor:pointer;border:1px solid var(--line)}
+    .icon-btn{width:40px;display:grid;place-items:center}.pill-btn{padding:0 14px;font-weight:800}
+    .pill-btn.primary{background:linear-gradient(135deg,var(--accent),#ff6b48);border:0;color:#fff}
+
+    .hero{padding:34px 0 18px}
+    .hero-card{position:relative;overflow:hidden;border-radius:26px;min-height:420px;background:
+      linear-gradient(90deg,rgba(5,8,14,.95) 0%,rgba(5,8,14,.70) 48%,rgba(5,8,14,.18) 100%),
+      url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1600&q=85') center/cover;
+      border:1px solid var(--line);box-shadow:var(--shadow);display:flex;align-items:flex-end}
+    .hero-copy{padding:34px;max-width:680px;color:white}
+    .eyebrow{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15);font-size:12px;font-weight:800;margin-bottom:14px}
+    .hero h1{font-size:clamp(34px,7vw,68px);line-height:.98;letter-spacing:-2.5px;margin-bottom:15px}
+    .hero p{color:#d5d9e2;font-size:15px;line-height:1.65;max-width:590px}
+    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+    .cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 17px;border-radius:14px;font-weight:900;cursor:pointer}
+    .cta.primary{background:#fff;color:#111}.cta.secondary{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);color:#fff}
+
+    .trust{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+    .trust-item{padding:13px;border:1px solid var(--line);background:var(--surface);border-radius:16px;display:flex;gap:10px;align-items:center}
+    .trust-item i{color:var(--accent)}.trust-item b{display:block;font-size:13px}.trust-item span{color:var(--muted);font-size:11px}
+
+    .toolbar{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:28px 0 18px;flex-wrap:wrap}
+    .tabs{display:flex;gap:8px;overflow:auto;padding-bottom:2px;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}
+    .tab{white-space:nowrap;padding:10px 14px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--muted);font-weight:800;cursor:pointer}
+    .tab.active{background:var(--text);color:var(--bg)}
+    .search{position:relative;min-width:min(100%,290px);flex:0 1 340px}.search input{width:100%;height:43px;border-radius:13px;border:1px solid var(--line);background:var(--surface);color:var(--text);padding:0 42px 0 14px;outline:none}.search i{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--muted)}
+
+    .section{padding:6px 0 25px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:14px;margin-bottom:14px}.section-head h2{font-size:24px;letter-spacing:-.6px}.section-head p{color:var(--muted);font-size:13px;margin-top:4px}.count{color:var(--muted);font-size:12px;font-weight:800}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+    .card{background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.08);transition:.2s;display:flex;flex-direction:column;min-width:0}
+    .card:hover{transform:translateY(-3px)}
+    .thumb{aspect-ratio:16/10;position:relative;background:var(--surface2);overflow:hidden}.thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:.3s}.card:hover .thumb img{transform:scale(1.03)}
+    .badge-row{position:absolute;top:10px;left:10px;right:10px;display:flex;justify-content:space-between;gap:8px}.badge{padding:5px 8px;border-radius:999px;background:rgba(8,11,16,.78);color:#fff;font-size:10px;font-weight:900;backdrop-filter:blur(8px)}.badge.sale{background:var(--accent)}
+    .card-body{padding:14px;display:flex;flex-direction:column;gap:10px;flex:1}.card h3{font-size:16px;line-height:1.25}.meta{display:flex;gap:7px;flex-wrap:wrap;color:var(--muted);font-size:11px;font-weight:800}.meta span{background:var(--surface2);padding:5px 7px;border-radius:8px}
+    .desc{font-size:12px;line-height:1.5;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .price{font-size:18px;font-weight:950}.price small{font-size:11px;color:var(--muted);font-weight:800}
+    .card-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:auto}.small-btn{min-height:40px;border-radius:12px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;background:var(--surface2);color:var(--text);border:1px solid var(--line);font-size:12px}.small-btn.accent{background:var(--accent);border-color:var(--accent);color:#fff}.small-btn.good{background:var(--good);border-color:var(--good);color:#fff}.small-btn.full{grid-column:1/-1}
+
+    .note{margin:12px 0 30px;padding:16px;border-radius:16px;background:var(--surface);border:1px solid var(--line);color:var(--muted);font-size:12px;line-height:1.6}.note strong{color:var(--text)}
+    footer{border-top:1px solid var(--line);margin-top:20px;padding:26px 0 40px;color:var(--muted);font-size:12px}.footer-grid{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.footer-links{display:flex;gap:14px;flex-wrap:wrap}.footer-links a:hover{color:var(--text)}
+
+    .modal{display:none;position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,.86);backdrop-filter:blur(7px);padding:16px;align-items:center;justify-content:center}.modal.show{display:flex}.modal-box{width:min(960px,100%);background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow)}.modal-top{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--line)}.modal-top h3{font-size:15px}.close{width:36px;height:36px;border-radius:10px;background:var(--surface2);color:var(--text);cursor:pointer}.media{aspect-ratio:16/9;background:#000}.media iframe,.media video{width:100%;height:100%;border:0;display:block;background:#000}.modal-info{padding:14px;color:var(--muted);font-size:12px;line-height:1.55}
+    .empty{grid-column:1/-1;padding:35px;text-align:center;border:1px dashed var(--line);border-radius:18px;color:var(--muted)}
+
+    @media(max-width:980px){.grid{grid-template-columns:repeat(3,1fr)}.trust{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:720px){
+      .wrap{width:min(100% - 20px,1180px)}.nav{height:58px}.brand small{display:none}.pill-btn .label{display:none}.pill-btn{padding:0 12px}
+      .hero{padding-top:16px}.hero-card{min-height:500px;background-position:60% center}.hero-copy{padding:24px 18px}.hero h1{font-size:43px;letter-spacing:-1.7px}.hero p{font-size:14px}.hero-actions .cta{flex:1;min-width:140px}
+      .trust{grid-template-columns:1fr 1fr}.trust-item{padding:11px}.trust-item span{display:none}
+      .toolbar{align-items:stretch}.tabs{width:100%}.search{width:100%;flex:1 1 100%}.grid{grid-template-columns:repeat(2,1fr);gap:10px}.card{border-radius:16px}.card-body{padding:11px}.card h3{font-size:14px}.desc{display:none}.price{font-size:16px}.card-actions{grid-template-columns:1fr}.small-btn{grid-column:1!important}.section-head h2{font-size:21px}
+    }
+    @media(max-width:430px){.hero h1{font-size:38px}.trust{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr 1fr}.thumb{aspect-ratio:4/3}.meta span:nth-child(n+3){display:none}.small-btn{font-size:11px;min-height:38px}.brand span.title{font-size:14px}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Sume Entertainment home">
+      <span class="brand-mark"><i class="fa-solid fa-play"></i></span>
+      <span><span class="title">Sume Entertainment</span><small>MOVIES • GAMES • TECH</small></span>
+    </a>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeBtn" aria-label="Toggle dark or light mode"><i class="fa-solid fa-sun"></i></button>
+      <a class="pill-btn primary" href="#store"><i class="fa-solid fa-bag-shopping"></i> <span class="label">Shop Now</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-card">
+        <div class="hero-copy">
+          <div class="eyebrow"><i class="fa-solid fa-circle-check"></i> Trailers • Originals • Downloads • Gaming</div>
+          <h1>Watch free. Download free. Support us if you love it.</h1>
+          <p>Watch trailers and full movies online, download titles that are free or authorized for download, and optionally support Sume by buying an original copy. Browse PS2–PS5 games, monitors, external drives and accessories below the movies.</p>
+          <div class="hero-actions">
+            <a href="#store" class="cta primary"><i class="fa-solid fa-film"></i> Browse Store</a>
+            <a href="#games" class="cta secondary"><i class="fa-brands fa-playstation"></i> PS2–PS5 Games</a>
+          </div>
+        </div>
+      </div>
+      <div class="trust">
+        <div class="trust-item"><i class="fa-solid fa-circle-play"></i><div><b>Trailers</b><span>Preview before buying</span></div></div>
+        <div class="trust-item"><i class="fa-solid fa-download"></i><div><b>Free Downloads</b><span>Where permitted</span></div></div>
+        <div class="trust-item"><i class="fa-brands fa-playstation"></i><div><b>PS2 to PS5</b><span>Games & accessories</span></div></div>
+        <div class="trust-item"><i class="fa-solid fa-display"></i><div><b>Accessories</b><span>Shown below movies</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="store">
+    <div class="toolbar">
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-filter="all">All</button>
+        <button class="tab" data-filter="movie">Movies</button>
+        <button class="tab" data-filter="game">Games</button>
+        <button class="tab" data-filter="monitor">Monitors</button>
+        <button class="tab" data-filter="storage">External Drives</button>
+        <button class="tab" data-filter="accessory">Accessories</button>
+      </div>
+      <label class="search"><input id="searchInput" type="search" placeholder="Search movies, PS5, monitor..." /><i class="fa-solid fa-magnifying-glass"></i></label>
+    </div>
+
+    <section class="section">
+      <div class="section-head"><div><h2>Movies & Entertainment</h2><p>Watch online, download free where permitted, or optionally support us by buying an original copy.</p></div><span class="count" id="movieCount"></span></div>
+      <div class="grid" id="movieGrid"></div>
+    </section>
+
+    <section class="section movie-accessories">
+      <div class="section-head"><div><h2>Accessories for Your Movie Setup</h2><p>Recommended extras displayed directly under the movies.</p></div><span class="count" id="movieAccessoryCount"></span></div>
+      <div class="grid" id="movieAccessoryGrid"></div>
+    </section>
+
+    <section class="section" id="games">
+      <div class="section-head"><div><h2>PlayStation Games</h2><p>Clearly labeled from PS2 through PS5.</p></div><span class="count" id="gameCount"></span></div>
+      <div class="grid" id="gameGrid"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div><h2>Monitors, Storage & Accessories</h2><p>Extra products you sell can live in the same store.</p></div><span class="count" id="gearCount"></span></div>
+      <div class="grid" id="gearGrid"></div>
+    </section>
+
+    <div class="note"><strong>How it works:</strong> visitors can watch online, download a free/authorized copy when you provide one, or optionally buy an original copy to support the website. Only publish movies and game downloads that you own or are authorized to distribute. GitHub Pages is best for the website itself; keep large media files on suitable storage and link to them from here.</div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div>© <span id="year"></span> Sume Entertainment. All rights reserved.</div>
+    <div class="footer-links"><a href="#store">Store</a><a href="#games">Games</a><a href="mailto:you@example.com">Contact</a><a href="#">Privacy</a></div>
+  </div>
+</footer>
+
+<div class="modal" id="playerModal" role="dialog" aria-modal="true" aria-label="Media player">
+  <div class="modal-box">
+    <div class="modal-top"><h3 id="modalTitle">Preview</h3><button class="close" onclick="closePlayer()" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="media" id="mediaBox"></div>
+    <div class="modal-info" id="modalInfo"></div>
+  </div>
+</div>
+
+<script>
+  // ============================================================
+  // EDIT YOUR STORE HERE.
+  // Replace demo images, prices, trailer/full movie URLs and links.
+  // For WhatsApp, change STORE.whatsapp to your number with country code.
+  // Example Tanzania: 2557XXXXXXXX (no + sign, no spaces).
+  // ============================================================
+  const STORE = {
+    whatsapp: "255700000000",
+    currency: "TZS",
+    items: [
+      {
+        type:"movie", title:"Action Night", label:"Original Movie", platform:"Movie", year:"2026", quality:"HD",
+        price:"8,000", image:"https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=900&q=80",
+        description:"Action movie available as an original copy. Watch the trailer before you buy.",
+        trailer:"https://www.youtube.com/embed/EXeTwQWrcwY", fullMovie:"", download:""
+      },
+      {
+        type:"movie", title:"Bongo Love Story", label:"Swahili Movie", platform:"Movie", year:"2026", quality:"1080p",
+        price:"6,000", image:"https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=900&q=80",
+        description:"Swahili entertainment title. Add your real trailer, full movie or authorized download link.",
+        trailer:"https://www.youtube.com/embed/ByXuk9QqQkk", fullMovie:"", download:""
+      },
+      {
+        type:"movie", title:"Cinema Collection Vol. 1", label:"Movie Pack", platform:"Movie", year:"2026", quality:"Full HD",
+        price:"15,000", image:"https://images.unsplash.com/photo-1485095329183-d0797cdc5676?auto=format&fit=crop&w=900&q=80",
+        description:"A sample movie bundle card. Replace this with your own licensed collection.",
+        trailer:"https://www.youtube.com/embed/zSWdZVtXT7E", fullMovie:"", download:""
+      },
+      {
+        type:"game", title:"Football Pro 2026", label:"PS5 Game", platform:"PS5", year:"2026", quality:"Game",
+        price:"45,000", image:"https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&w=900&q=80",
+        description:"PlayStation 5 game listing. Use Buy Original for physical or licensed digital sales.", buyLink:""
+      },
+      {
+        type:"game", title:"Street Racing", label:"PS4 Game", platform:"PS4", year:"2025", quality:"Game",
+        price:"30,000", image:"https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=900&q=80",
+        description:"PS4 game sample card. Replace image, name and price with your own stock.", buyLink:""
+      },
+      {
+        type:"game", title:"Classic Adventure", label:"PS2 Game", platform:"PS2", year:"Classic", quality:"Game",
+        price:"8,000", image:"https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=900&q=80",
+        description:"PS2 game sample card. You can add PS3, PS4 and PS5 products the same way.", buyLink:""
+      },
+      {
+        type:"monitor", title:"24-inch Gaming Monitor", label:"Monitor", platform:"1080p", year:"New", quality:"75Hz",
+        price:"280,000", image:"https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=900&q=80",
+        description:"Example monitor listing. Add HDMI, refresh rate, warranty and availability in the description.", buyLink:""
+      },
+      {
+        type:"storage", title:"1TB External Drive", label:"External Storage", platform:"USB 3.0", year:"New", quality:"1TB",
+        price:"120,000", image:"https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=900&q=80",
+        description:"Portable external storage for movies, backups and console files.", buyLink:""
+      },
+      {
+        type:"accessory", title:"PlayStation Controller", label:"Accessory", platform:"PS4 / PS5", year:"New", quality:"Controller",
+        price:"55,000", image:"https://images.unsplash.com/photo-1592840496694-26d035b52b48?auto=format&fit=crop&w=900&q=80",
+        description:"Example controller/accessory listing. Add condition and compatibility clearly.", buyLink:""
+      }
+    ]
+  };
+
+  let activeFilter = "all";
+  let searchTerm = "";
+
+  const grids = {
+    movie: document.getElementById("movieGrid"),
+    game: document.getElementById("gameGrid"),
+    gear: document.getElementById("gearGrid")
+  };
+
+  function money(item){ return item.price ? `${STORE.currency} ${item.price}` : "Contact for price"; }
+  function escapeHtml(value=""){ return value.replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#039;','"':'&quot;'}[c])); }
+  function waLink(item){
+    const msg = encodeURIComponent(`Hello Sume Entertainment, I want to buy: ${item.title} (${item.platform || item.label}) - ${money(item)}`);
+    return `https://wa.me/${STORE.whatsapp}?text=${msg}`;
+  }
+  function card(item){
+    const isMovie = item.type === "movie";
+    const isFreeDownload = isMovie && !!item.download;
+    const directBuy = item.buyLink || waLink(item);
+    const watchBtn = isMovie && item.fullMovie ? `<button class="small-btn accent full" onclick='openPlayer(${JSON.stringify(item.fullMovie)}, ${JSON.stringify(item.title)}, ${JSON.stringify(item.description || "")})'><i class="fa-solid fa-play"></i> Watch Online</button>` : (isMovie && item.trailer ? `<button class="small-btn accent full" onclick='openPlayer(${JSON.stringify(item.trailer)}, ${JSON.stringify(item.title + " — Trailer")}, ${JSON.stringify(item.description || "")})'><i class="fa-solid fa-play"></i> Watch Trailer</button>` : "");
+    const trailerBtn = isMovie && item.trailer && item.fullMovie ? `<button class="small-btn" onclick='openPlayer(${JSON.stringify(item.trailer)}, ${JSON.stringify(item.title + " — Trailer")}, ${JSON.stringify(item.description || "")})'><i class="fa-solid fa-film"></i> Trailer</button>` : "";
+    const downloadBtn = isFreeDownload ? `<a class="small-btn good full" href="${escapeHtml(item.download)}" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> Download Free</a>` : "";
+    const supportBtn = isMovie ? `<a class="small-btn ${isFreeDownload ? '' : 'accent'} full" href="${escapeHtml(directBuy)}" target="_blank" rel="noopener"><i class="fa-solid fa-heart"></i> ${isFreeDownload ? 'Support / Buy Original' : 'Buy Original'}</a>` : `<a class="small-btn accent full" href="${escapeHtml(directBuy)}" target="_blank" rel="noopener"><i class="fa-solid fa-cart-shopping"></i> Buy</a>`;
+    return `
+      <article class="card" data-type="${item.type}" data-search="${escapeHtml((item.title+' '+item.label+' '+item.platform+' '+(item.description||'')).toLowerCase())}">
+        <div class="thumb">
+          <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" loading="lazy" />
+          <div class="badge-row"><span class="badge">${escapeHtml(item.label)}</span><span class="badge sale">${escapeHtml(item.quality || "Available")}</span></div>
+        </div>
+        <div class="card-body">
+          <div><h3>${escapeHtml(item.title)}</h3><div class="meta"><span>${escapeHtml(item.platform || "Store")}</span><span>${escapeHtml(item.year || "Available")}</span><span>${escapeHtml(item.quality || "")}</span></div></div>
+          <p class="desc">${escapeHtml(item.description || "")}</p>
+          <div class="price">${money(item)} <small>${isMovie ? "• Optional support" : "• In stock / ask"}</small></div>
+          <div class="card-actions">
+            ${watchBtn}${trailerBtn}${downloadBtn}${supportBtn}
+          </div>
+        </div>
+      </article>`;
+  }
+
+  function matches(item){
+    const filterOk = activeFilter === "all" || item.type === activeFilter;
+    const haystack = `${item.title} ${item.label} ${item.platform} ${item.description || ""}`.toLowerCase();
+    return filterOk && haystack.includes(searchTerm);
+  }
+
+  function render(){
+    const filtered = STORE.items.filter(matches);
+    const movies = filtered.filter(x=>x.type==='movie');
+    const games = filtered.filter(x=>x.type==='game');
+    const accessories = filtered.filter(x=>['monitor','storage','accessory'].includes(x.type));
+    const gear = accessories;
+    grids.movie.innerHTML = movies.length ? movies.map(card).join('') : `<div class="empty">No matching movies found.</div>`;
+    grids.game.innerHTML = games.length ? games.map(card).join('') : `<div class="empty">No matching games found.</div>`;
+    grids.gear.innerHTML = gear.length ? gear.map(card).join('') : `<div class="empty">No matching accessories found.</div>`;
+    document.getElementById('movieCount').textContent = `${movies.length} item${movies.length===1?'':'s'}`;
+    document.getElementById('gameCount').textContent = `${games.length} item${games.length===1?'':'s'}`;
+    document.getElementById('gearCount').textContent = `${gear.length} item${gear.length===1?'':'s'}`;
+    const accessoryShelf = document.querySelector('.movie-accessories');
+    const showShelf = activeFilter === 'all' || ['monitor','storage','accessory'].includes(activeFilter);
+    accessoryShelf.style.display = showShelf ? '' : 'none';
+    document.getElementById('movieAccessoryGrid').innerHTML = accessories.length ? accessories.slice(0,4).map(card).join('') : `<div class="empty">No accessories added yet.</div>`;
+    document.getElementById('movieAccessoryCount').textContent = `${Math.min(accessories.length,4)} shown`;
+  }
+
+  document.getElementById('tabs').addEventListener('click', e=>{
+    const btn=e.target.closest('.tab'); if(!btn) return;
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active')); btn.classList.add('active');
+    activeFilter=btn.dataset.filter; render();
+  });
+  document.getElementById('searchInput').addEventListener('input',e=>{searchTerm=e.target.value.trim().toLowerCase();render();});
+
+  function openPlayer(url,title,description){
+    const modal=document.getElementById('playerModal');
+    document.getElementById('modalTitle').textContent=title;
+    document.getElementById('modalInfo').textContent=description || '';
+    const box=document.getElementById('mediaBox');
+    if(/youtube\.com\/embed|youtu\.be|vimeo\.com/i.test(url)){
+      box.innerHTML=`<iframe src="${url}${url.includes('?')?'&':'?'}autoplay=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+    }else{
+      box.innerHTML=`<video controls autoplay playsinline src="${url}">Your browser does not support video playback.</video>`;
+    }
+    modal.classList.add('show'); document.body.style.overflow='hidden';
+  }
+  function closePlayer(){
+    document.getElementById('playerModal').classList.remove('show');
+    document.getElementById('mediaBox').innerHTML=''; document.body.style.overflow='';
+  }
+  document.getElementById('playerModal').addEventListener('click',e=>{if(e.target.id==='playerModal')closePlayer();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closePlayer();});
+
+  const themeBtn=document.getElementById('themeBtn');
+  function setTheme(theme){
+    document.documentElement.dataset.theme=theme;
+    localStorage.setItem('sume-theme',theme);
+    themeBtn.innerHTML=theme==='dark'?'<i class="fa-solid fa-sun"></i>':'<i class="fa-solid fa-moon"></i>';
+    document.querySelector('meta[name="theme-color"]').setAttribute('content',theme==='dark'?'#0b0d12':'#f5f7fb');
+  }
+  themeBtn.addEventListener('click',()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark'));
+  setTheme(localStorage.getItem('sume-theme') || (matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'));
+  document.getElementById('year').textContent=new Date().getFullYear();
+  render();
+</script>
+</body>
+</html>
