@@ -1,40 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sw">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sume Entertainment - Stream Free Movies & TV Shows</title>
+    <title>Sume Entertainment - Stream Free Swahili & English Movies, TV Shows</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* CSS RESET & VARIABLES */
+        /* RESET & CORE STYLES */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         :root {
-            --bg-dark: #0f1015;
-            --bg-card: #181a20;
-            --bg-hover: #262932;
+            --bg-dark: #0b0c10;
+            --bg-card: #15171e;
+            --bg-hover: #202430;
             --accent-color: #ff2a55;
-            --accent-hover: #e02246;
+            --accent-yellow: #ffca28;
             --text-main: #ffffff;
-            --text-muted: #8c8f9a;
-            --nav-bg: rgba(15, 16, 21, 0.95);
+            --text-muted: #9a9ea9;
+            --nav-bg: rgba(11, 12, 16, 0.96);
         }
 
         body {
             background-color: var(--bg-dark);
             color: var(--text-main);
             overflow-x: hidden;
-            padding-bottom: 50px;
+            padding-bottom: 30px;
         }
 
-        /* NAVIGATION BAR */
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* HEADER & NAVBAR */
         header {
             position: fixed;
             top: 0;
@@ -42,55 +48,349 @@
             width: 100%;
             z-index: 1000;
             background: var(--nav-bg);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .navbar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            max-width: 1400px;
+            max-width: 1500px;
             margin: 0 auto;
-            padding: 15px 30px;
+            padding: 10px 20px;
+            gap: 15px;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 24px;
+            gap: 8px;
+            font-size: 20px;
             font-weight: 800;
             color: var(--accent-color);
-            text-decoration: none;
+            white-space: nowrap;
         }
 
-        .logo i {
-            font-size: 28px;
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
-        .search-bar {
-            position: relative;
-            width: 40%;
-            max-width: 500px;
+        .nav-links {
+            display: flex;
+            gap: 16px;
+            list-style: none;
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: none;
         }
 
-        .search-bar input {
-            width: 100%;
-            padding: 10px 16px 10px 42px;
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
+        .nav-links::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .nav-links a.active, .nav-links a:hover {
             color: var(--text-main);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            white-space: nowrap;
+        }
+
+        .btn-premium {
+            background: linear-gradient(45deg, #ffca28, #ff9800);
+            color: #000;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-app {
+            background: var(--bg-hover);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .search-trigger {
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* HERO BANNER FEATURED */
+        .hero {
+            position: relative;
+            min-height: 65vh;
+            margin-top: 55px;
+            display: flex;
+            align-items: flex-end;
+            background: linear-gradient(to top, var(--bg-dark) 10%, rgba(11, 12, 16, 0.4) 60%, transparent 100%), 
+                        url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1600&q=80') center/cover;
+        }
+
+        .hero-content {
+            max-width: 1500px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .hero-title {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            line-height: 1.1;
+        }
+
+        .hero-tags {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: var(--text-muted);
+            align-items: center;
+        }
+
+        .badge-tag {
+            background: var(--accent-color);
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .hero-btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .btn-action {
+            padding: 10px 22px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-play {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .btn-list {
+            background: var(--bg-card);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        /* PROMOTIONAL DISCOVER CARDS */
+        .promo-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            max-width: 1500px;
+            margin: 20px auto 10px;
+            padding: 0 20px;
+        }
+
+        .promo-card {
+            background: var(--bg-card);
+            padding: 12px 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .promo-info h4 {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .promo-info p {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .promo-btn {
+            font-size: 12px;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        /* CONTENT SECTIONS & HORIZONTAL SLIDERS */
+        .section-container {
+            max-width: 1500px;
+            margin: 25px auto 0;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .see-more {
+            font-size: 13px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .horizontal-slider {
+            display: flex;
+            gap: 14px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .horizontal-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* MOVIE CARDS */
+        .card {
+            flex: 0 0 140px;
+            background: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
+        .poster-box {
+            position: relative;
+            width: 100%;
+            padding-top: 145%;
+            background: #202430;
+        }
+
+        .poster-box img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .lang-badge {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            background: var(--accent-color);
+            color: #fff;
+            padding: 2px 4px;
+            font-size: 9px;
+            font-weight: 700;
+            border-radius: 3px;
+        }
+
+        .qual-badge {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 2px 4px;
+            font-size: 9px;
+            border-radius: 3px;
+        }
+
+        .card-details {
+            padding: 8px;
+        }
+
+        .card-title {
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 3px;
+        }
+
+        .card-sub {
+            font-size: 10px;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* SEARCH OVERLAY */
+        .search-modal {
+            display: none;
+            position: fixed;
+            top: 55px;
+            left: 0;
+            width: 100%;
+            background: var(--bg-card);
+            padding: 15px 20px;
+            z-index: 999;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .search-input-box {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-input-box input {
+            width: 100%;
+            padding: 10px 40px;
+            border-radius: 20px;
+            background: var(--bg-dark);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
             outline: none;
-            transition: 0.3s;
         }
 
-        .search-bar input:focus {
-            border-color: var(--accent-color);
-        }
-
-        .search-bar i {
+        .search-input-box i {
             position: absolute;
             left: 15px;
             top: 50%;
@@ -98,520 +398,351 @@
             color: var(--text-muted);
         }
 
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-
-        .nav-links a.active, .nav-links a:hover {
-            color: var(--text-main);
-        }
-
-        /* HERO BANNER SLIDER */
-        .hero {
-            position: relative;
-            height: 70vh;
-            margin-top: 60px;
-            display: flex;
-            align-items: flex-end;
-            background: linear-gradient(to top, var(--bg-dark), transparent 80%), 
-                        url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1600&q=80') center/cover;
-        }
-
-        .hero-content {
-            max-width: 1400px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 40px 30px;
-        }
-
-        .hero-title {
-            font-size: 48px;
-            font-weight: 800;
-            margin-bottom: 12px;
-            line-height: 1.1;
-        }
-
-        .hero-meta {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-
-        .badge {
-            background: var(--accent-color);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 12px;
-        }
-
-        .hero-desc {
-            max-width: 600px;
-            color: var(--text-muted);
-            margin-bottom: 25px;
-            line-height: 1.5;
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 15px;
-        }
-
-        .btn {
-            padding: 12px 28px;
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: 0.3s;
-        }
-
-        .btn-primary {
-            background: var(--accent-color);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--accent-hover);
-        }
-
-        .btn-secondary {
-            background: var(--bg-card);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .btn-secondary:hover {
-            background: var(--bg-hover);
-        }
-
-        /* CATEGORIES / FILTERS */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 30px;
-        }
-
-        .filter-tags {
-            display: flex;
-            gap: 10px;
-            margin: 30px 0 20px;
-            overflow-x: auto;
-            padding-bottom: 10px;
-        }
-
-        .tag {
-            padding: 8px 18px;
-            background: var(--bg-card);
-            border-radius: 20px;
-            font-size: 14px;
-            cursor: pointer;
-            white-space: nowrap;
-            color: var(--text-muted);
-            transition: 0.3s;
-        }
-
-        .tag.active, .tag:hover {
-            background: var(--accent-color);
-            color: white;
-        }
-
-        /* MOVIE GRID */
-        .section-title {
-            font-size: 22px;
-            font-weight: 700;
-            margin: 30px 0 20px;
-        }
-
-        .movie-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 20px;
-        }
-
-        .movie-card {
-            background: var(--bg-card);
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .movie-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .poster-container {
-            position: relative;
-            width: 100%;
-            height: 260px;
-        }
-
-        .poster-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .quality-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(0, 0, 0, 0.7);
-            color: #fff;
-            padding: 2px 6px;
-            font-size: 10px;
-            border-radius: 4px;
-            backdrop-filter: blur(4px);
-        }
-
-        .movie-info {
-            padding: 12px;
-        }
-
-        .movie-title {
-            font-size: 14px;
-            font-weight: 600;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            margin-bottom: 6px;
-        }
-
-        .movie-details {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        .rating {
-            color: #f1c40f;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        /* MODAL / PLAYER OVERLAY */
-        .modal {
+        /* MODAL VIDEO PLAYER */
+        .player-modal {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             z-index: 2000;
             justify-content: center;
             align-items: center;
+            padding: 15px;
         }
 
-        .modal-content {
+        .player-box {
             background: var(--bg-card);
-            width: 90%;
+            width: 100%;
             max-width: 850px;
             border-radius: 12px;
             overflow: hidden;
             position: relative;
         }
 
-        .close-btn {
+        .close-player {
             position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 24px;
+            top: 10px;
+            right: 15px;
+            font-size: 26px;
             color: #fff;
             cursor: pointer;
             z-index: 10;
         }
 
-        .video-container {
+        .iframe-container {
             width: 100%;
-            height: 450px;
+            aspect-ratio: 16 / 9;
             background: #000;
         }
 
-        .video-container iframe {
+        .iframe-container iframe {
             width: 100%;
             height: 100%;
             border: none;
         }
 
-        .modal-details {
-            padding: 20px;
+        .player-info {
+            padding: 15px;
         }
 
-        /* RESPONSIVE DESIGN */
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 15px;
-            }
-            .search-bar {
-                display: none;
-            }
-            .hero {
-                height: 50vh;
+        /* FOOTER & DISCLAIMER */
+        footer {
+            max-width: 1500px;
+            margin: 50px auto 0;
+            padding: 0 20px;
+            color: var(--text-muted);
+            font-size: 12px;
+            line-height: 1.6;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 25px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        /* RESPONSIVE */
+        @media (min-width: 769px) {
+            .card {
+                flex: 0 0 160px;
             }
             .hero-title {
-                font-size: 28px;
+                font-size: 48px;
             }
-            .movie-grid {
-                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-                gap: 12px;
-            }
-            .poster-container {
-                height: 190px;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-hide {
+                display: none !important;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
+    <!-- NAVBAR HEADER -->
     <header>
         <nav class="navbar">
-            <a href="#" class="logo">
-                <i class="fa-solid fa-play-circle"></i>
-                <span>Sume Entertainment</span>
-            </a>
-            <div class="search-bar">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="searchInput" placeholder="Search movies, TV shows...">
+            <div class="nav-left">
+                <a href="#" class="logo">
+                    <i class="fa-solid fa-circle-play"></i>
+                    <span>Sume</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">TV show</a></li>
+                    <li><a href="#">Movie</a></li>
+                    <li><a href="#" style="color:#ff2a55;">🇹🇿 Swahili</a></li>
+                    <li><a href="#">Midnight</a></li>
+                    <li><a href="#">Animation</a></li>
+                    <li><a href="#">Most Watched</a></li>
+                    <li><a href="#">Sume App</a></li>
+                    <li><a href="#">More</a></li>
+                </ul>
             </div>
-            <ul class="nav-links">
-                <li><a href="#" class="active">Home</a></li>
-                <li><a href="#">Movies</a></li>
-                <li><a href="#">TV Shows</a></li>
-            </ul>
+            <div class="nav-right">
+                <i class="fa-solid fa-magnifying-glass search-trigger" onclick="toggleSearch()"></i>
+                <a href="#" class="btn-premium"><i class="fa-solid fa-crown"></i> Go Premium</a>
+                <a href="#" class="btn-app desktop-hide"><i class="fa-solid fa-download"></i> App</a>
+                <span style="font-size:12px; color:var(--text-muted);" class="desktop-hide">SWA / ENG</span>
+                <a href="#" style="font-size:13px; font-weight:600;">Log in</a>
+            </div>
         </nav>
     </header>
 
-    <!-- HERO SECTION -->
-    <section class="hero" id="heroSection">
+    <!-- SEARCH OVERLAY BAR -->
+    <div class="search-modal" id="searchBar">
+        <div class="search-input-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Search Swahili, English movies, TV Shows, Anime...">
+        </div>
+    </div>
+
+    <!-- HERO FEATURED SECTION -->
+    <section class="hero">
         <div class="hero-content">
-            <h1 class="hero-title" id="heroTitle">Avatar: The Way of Water</h1>
-            <div class="hero-meta">
-                <span class="badge">HD</span>
-                <span><i class="fa-solid fa-star" style="color: #f1c40f;"></i> 7.8</span>
-                <span>2022</span>
-                <span>3h 12m</span>
-                <span>Action, Sci-Fi</span>
+            <h1 class="hero-title">Irumudi & Swahili Choice</h1>
+            <div class="hero-tags">
+                <span class="badge-tag">SWAHILI DUB</span>
+                <span class="badge-tag" style="background:#27ae60;">2026</span>
+                <span>Action</span>
+                <span>•</span>
+                <span>Drama</span>
+                <span>•</span>
+                <span>Family</span>
             </div>
-            <p class="hero-desc" id="heroDesc">
-                Jake Sully lives with his newfound family formed on the extrasolar moon Pandora. Once a familiar threat returns to finish what was previously started...
+            <p style="max-width: 600px; color: #ccc; font-size: 14px; line-height: 1.4;">
+                Hadithi mpya kabisa yenye kusisimua ya mahaba, mapambano na usaliti iliyotafsiriwa vizuri kwa Kiswahili.
             </p>
-            <div class="btn-group">
-                <button class="btn btn-primary" onclick="openPlayer('https://www.youtube.com/embed/d9MyW72ELq0')">
+            <div class="hero-btn-group">
+                <button class="btn-action btn-play" onclick="openPlayer('https://www.youtube.com/embed/ByXuk9QqQkk', 'Irumudi', 'Hadithi mpya kabisa yenye kusisimua ya mahaba na usaliti.')">
                     <i class="fa-solid fa-play"></i> Watch Now
                 </button>
-                <button class="btn btn-secondary">
-                    <i class="fa-solid fa-plus"></i> Add to List
+                <button class="btn-action btn-list">
+                    <i class="fa-solid fa-plus"></i> Watchlist
                 </button>
             </div>
         </div>
     </section>
 
-    <!-- MAIN CONTENT -->
-    <main class="container">
-        <!-- FILTER TAGS -->
-        <div class="filter-tags">
-            <div class="tag active" onclick="filterGenre('All')">All</div>
-            <div class="tag" onclick="filterGenre('Action')">Action</div>
-            <div class="tag" onclick="filterGenre('Sci-Fi')">Sci-Fi</div>
-            <div class="tag" onclick="filterGenre('Drama')">Drama</div>
-            <div class="tag" onclick="filterGenre('Comedy')">Comedy</div>
-            <div class="tag" onclick="filterGenre('Animation')">Animation</div>
+    <!-- DISCOVER PROMOTIONAL LINKS -->
+    <div class="promo-bar">
+        <div class="promo-card">
+            <div class="promo-info">
+                <h4>DoResumes</h4>
+                <p>Create a professional resume in minutes.</p>
+            </div>
+            <a href="#" class="promo-btn">Visit →</a>
         </div>
+        <div class="promo-card">
+            <div class="promo-info">
+                <h4>VSKit</h4>
+                <p>Discover trending short dramas & clips.</p>
+            </div>
+            <a href="#" class="promo-btn">Visit →</a>
+        </div>
+        <div class="promo-card">
+            <div class="promo-info">
+                <h4>Gamixo</h4>
+                <p>Play thousands of free online games.</p>
+            </div>
+            <a href="#" class="promo-btn">Visit →</a>
+        </div>
+        <div class="promo-card">
+            <div class="promo-info">
+                <h4>PawAtlas</h4>
+                <p>Discover pets & care guides.</p>
+            </div>
+            <a href="#" class="promo-btn">Visit →</a>
+        </div>
+    </div>
 
-        <!-- MOVIES SECTION -->
-        <h2 class="section-title">Trending Now</h2>
-        <div class="movie-grid" id="movieGrid">
-            <!-- Movie cards will be inserted here by JavaScript -->
-        </div>
+    <!-- MAIN DYNAMIC SECTIONS -->
+    <main>
+        <!-- HOT SHORT TV -->
+        <section class="section-container">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fa-solid fa-fire" style="color:var(--accent-color);"></i> Hot Short TV</h2>
+                <a href="#" class="see-more">More <i class="fa-solid fa-chevron-right"></i></a>
+            </div>
+            <div class="horizontal-slider" id="shortTvSlider"></div>
+        </section>
+
+        <!-- SWAHILI MOVIES & BONGO CINEMA -->
+        <section class="section-container">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fa-solid fa-film" style="color:#27ae60;"></i> Swahili Movies & Bongo Cinema</h2>
+                <a href="#" class="see-more">More <i class="fa-solid fa-chevron-right"></i></a>
+            </div>
+            <div class="horizontal-slider" id="swahiliSlider"></div>
+        </section>
+
+        <!-- TRENDING NOW -->
+        <section class="section-container">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fa-solid fa-bolt" style="color:var(--accent-yellow);"></i> Trending Now</h2>
+                <a href="#" class="see-more">More <i class="fa-solid fa-chevron-right"></i></a>
+            </div>
+            <div class="horizontal-slider" id="trendingSlider"></div>
+        </section>
+
+        <!-- HOLLYWOOD & GLOBAL -->
+        <section class="section-container">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fa-solid fa-clapperboard"></i> Hollywood Hits</h2>
+                <a href="#" class="see-more">More <i class="fa-solid fa-chevron-right"></i></a>
+            </div>
+            <div class="horizontal-slider" id="hollywoodSlider"></div>
+        </section>
+
+        <!-- TOP ANIME -->
+        <section class="section-container">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fa-solid fa-dragon" style="color:#9b59b6;"></i> Top Anime</h2>
+                <a href="#" class="see-more">More <i class="fa-solid fa-chevron-right"></i></a>
+            </div>
+            <div class="horizontal-slider" id="animeSlider"></div>
+        </section>
     </main>
 
-    <!-- VIDEO MODAL -->
-    <div class="modal" id="videoModal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closePlayer()">&times;</span>
-            <div class="video-container">
-                <iframe id="videoIframe" src="" allowfullscreen></iframe>
+    <!-- FOOTER -->
+    <footer>
+        <p><strong>Disclaimer:</strong> All videos and pictures on Sume Entertainment are indexed from third-party services on the Internet. Their copyrights belong to their original creators. We only provide webpage discovery services and do not store or upload media files.</p>
+        
+        <div class="footer-links">
+            <a href="#">About Sume Entertainment</a> |
+            <a href="#">Official Link Release</a> |
+            <a href="#">Download Sume APK</a> |
+            <a href="#">Privacy Policy</a> |
+            <a href="#">User Agreement</a>
+        </div>
+        
+        <p>© 2026 Sume Entertainment. All Rights Reserved.</p>
+    </footer>
+
+    <!-- PLAYER OVERLAY MODAL -->
+    <div class="player-modal" id="playerModal">
+        <div class="player-box">
+            <span class="close-player" onclick="closePlayer()">&times;</span>
+            <div class="iframe-container">
+                <iframe id="videoIframe" src="" allowfullscreen allow="autoplay"></iframe>
             </div>
-            <div class="modal-details">
-                <h2 id="modalTitle">Movie Title</h2>
-                <p id="modalDesc" style="color: var(--text-muted); margin-top: 8px; font-size: 14px;"></p>
+            <div class="player-info">
+                <h3 id="modalTitle">Title</h3>
+                <p id="modalDesc" style="color:var(--text-muted); font-size:13px; margin-top:5px;"></p>
             </div>
         </div>
     </div>
 
     <!-- JAVASCRIPT -->
     <script>
-        // Sample Movie Data
-        const movies = [
-            {
-                id: 1,
-                title: "Avatar: The Way of Water",
-                genre: "Sci-Fi",
-                rating: 7.8,
-                year: 2022,
-                quality: "4K",
-                poster: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=500&q=80",
-                trailer: "https://www.youtube.com/embed/d9MyW72ELq0",
-                description: "Jake Sully lives with his newfound family formed on the extrasolar moon Pandora."
-            },
-            {
-                id: 2,
-                title: "The Dark Knight",
-                genre: "Action",
-                rating: 9.0,
-                year: 2008,
-                quality: "HD",
-                poster: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=500&q=80",
-                trailer: "https://www.youtube.com/embed/EXeTwQWrcwY",
-                description: "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham."
-            },
-            {
-                id: 3,
-                title: "Interstellar",
-                genre: "Sci-Fi",
-                rating: 8.7,
-                year: 2014,
-                quality: "4K",
-                poster: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=500&q=80",
-                trailer: "https://www.youtube.com/embed/zSWdZVtXT7E",
-                description: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival."
-            },
-            {
-                id: 4,
-                title: "Cyberpunk City",
-                genre: "Action",
-                rating: 8.2,
-                year: 2023,
-                quality: "HD",
-                poster: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=500&q=80",
-                trailer: "https://www.youtube.com/embed/LembwKOiW8U",
-                description: "A thrilling ride through the neon-lit streets of a futuristic metropolis."
-            },
-            {
-                id: 5,
-                title: "Spirited Away",
-                genre: "Animation",
-                rating: 8.6,
-                year: 2001,
-                quality: "HD",
-                poster: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=500&q=80",
-                trailer: "https://www.youtube.com/embed/ByXuk9QqQkk",
-                description: "During her family's move to the suburbs, a 10-year-old girl wanders into a world ruled by gods and spirits."
-            },
-            {
-                id: 6,
-                title: "Joker",
-                genre: "Drama",
-                rating: 8.4,
-                year: 2019,
-                quality: "4K",
-                poster: "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=500&q=80",
-                trailer: "https://www.youtube.com/embed/zAGVQLHvwOY",
-                description: "A mentally troubled stand-up comedian embarks on a downward spiral that leads to the creation of an iconic villain."
-            }
+        // DATASETS
+        const shortTV = [
+            { title: "Raj Tilak", lang: "ENG", year: "2026", qual: "HD", img: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=400", trailer: "https://www.youtube.com/embed/EXeTwQWrcwY", desc: "Short drama of power and royal battle." },
+            { title: "Golden Boy Ki Love Story", lang: "ENG", year: "2026", qual: "HD", img: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=400", trailer: "https://www.youtube.com/embed/zSWdZVtXT7E", desc: "A heartwarming modern romantic short drama." },
+            { title: "Kisasi Cha Mtaa (Short)", lang: "SWA", year: "2026", qual: "4K", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400", trailer: "https://www.youtube.com/embed/ByXuk9QqQkk", desc: "Tamthilia fupi ya Kiswahili ya mapambano mtaani." },
+            { title: "Fake Doctor", lang: "ENG", year: "2026", qual: "HD", img: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400", trailer: "https://www.youtube.com/embed/LembwKOiW8U", desc: "Uncovering secrets in a urban hospital." }
         ];
 
-        // Render Movie Cards
-        function displayMovies(data) {
-            const movieGrid = document.getElementById('movieGrid');
-            movieGrid.innerHTML = '';
+        const swahiliMovies = [
+            { title: "Mwanamke wa Shaba", lang: "SWA", year: "2026", qual: "4K", img: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=400", trailer: "https://www.youtube.com/embed/ByXuk9QqQkk", desc: "Hadithi ya kusisimua ya mwanamke aliyepigania familia yake." },
+            { title: "Nyumba Ya Siri", lang: "SWA", year: "2025", qual: "HD", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400", trailer: "https://www.youtube.com/embed/zSWdZVtXT7E", desc: "Siri nzito za familia tajiri mjini Dar es Salaam." },
+            { title: "Moyo Wangu Drama", lang: "SWA", year: "2026", qual: "HD", img: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400", trailer: "https://www.youtube.com/embed/LembwKOiW8U", desc: "Kisa cha usaliti na msamaha kati ya wapenzi wawili." },
+            { title: "Usiku Wa Salama", lang: "SWA", year: "2024", qual: "HD", img: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400", trailer: "https://www.youtube.com/embed/EXeTwQWrcwY", desc: "Filamu fupi ya Bongo kuhusu changamoto za vijana." }
+        ];
 
-            if (data.length === 0) {
-                movieGrid.innerHTML = `<p style="color: var(--text-muted); grid-column: 1/-1;">No movies found.</p>`;
-                return;
-            }
+        const trendingMovies = [
+            { title: "Paris Has Fallen", lang: "ENG", year: "2026", qual: "4K", img: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400", trailer: "https://www.youtube.com/embed/d9MyW72ELq0", desc: "Action packed thriller in Paris." },
+            { title: "Irumudi [Swahili Dub]", lang: "SWA", year: "2026", qual: "4K", img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400", trailer: "https://www.youtube.com/embed/ByXuk9QqQkk", desc: "High octane action family drama." },
+            { title: "The Love Equations", lang: "ENG", year: "2025", qual: "HD", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400", trailer: "https://www.youtube.com/embed/zSWdZVtXT7E", desc: "Romantic drama serial." }
+        ];
 
-            data.forEach(movie => {
-                const card = document.createElement('div');
-                card.classList.add('movie-card');
-                card.onclick = () => openPlayer(movie.trailer, movie.title, movie.description);
+        const hollywoodMovies = [
+            { title: "In the Grey", lang: "ENG", year: "2026", qual: "4K", img: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=400", trailer: "https://www.youtube.com/embed/EXeTwQWrcwY", desc: "Action extraction story." },
+            { title: "The Whisper Man", lang: "ENG", year: "2025", qual: "HD", img: "https://images.unsplash.com/photo-1563089145-599997674d42?w=400", trailer: "https://www.youtube.com/embed/LembwKOiW8U", desc: "Psychological crime mystery." }
+        ];
 
-                card.innerHTML = `
-                    <div class="poster-container">
-                        <img src="${movie.poster}" alt="${movie.title}">
-                        <span class="quality-badge">${movie.quality}</span>
+        const animeList = [
+            { title: "Reincarnated as a Sword", lang: "ENG", year: "2026", qual: "HD", img: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400", trailer: "https://www.youtube.com/embed/LembwKOiW8U", desc: "Fantasy anime adventure." },
+            { title: "Demon-School Iruma-kun", lang: "ENG", year: "2025", qual: "HD", img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400", trailer: "https://www.youtube.com/embed/ByXuk9QqQkk", desc: "Comedy anime series." }
+        ];
+
+        // RENDER FUNCTION
+        function renderSlider(items, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = items.map(item => `
+                <div class="card" onclick="openPlayer('${item.trailer}', '${item.title}', '${item.desc}')">
+                    <div class="poster-box">
+                        <img src="${item.img}" alt="${item.title}" loading="lazy">
+                        <span class="lang-badge">${item.lang}</span>
+                        <span class="qual-badge">${item.qual}</span>
                     </div>
-                    <div class="movie-info">
-                        <div class="movie-title">${movie.title}</div>
-                        <div class="movie-details">
-                            <span>${movie.year} • ${movie.genre}</span>
-                            <span class="rating"><i class="fa-solid fa-star"></i> ${movie.rating}</span>
+                    <div class="card-details">
+                        <div class="card-title">${item.title}</div>
+                        <div class="card-sub">
+                            <span>${item.year}</span>
+                            <span><i class="fa-solid fa-star" style="color:#f1c40f;"></i> 8.5</span>
                         </div>
                     </div>
-                `;
-                movieGrid.appendChild(card);
-            });
+                </div>
+            `).join('');
         }
 
-        // Filter Movies by Genre
-        function filterGenre(genre) {
-            document.querySelectorAll('.tag').forEach(tag => {
-                tag.classList.remove('active');
-                if (tag.innerText === genre) tag.classList.add('active');
-            });
-
-            if (genre === 'All') {
-                displayMovies(movies);
-            } else {
-                const filtered = movies.filter(m => m.genre === genre);
-                displayMovies(filtered);
-            }
+        // TOGGLE SEARCH
+        function toggleSearch() {
+            const sb = document.getElementById('searchBar');
+            sb.style.display = (sb.style.display === 'block') ? 'none' : 'block';
         }
 
-        // Search Filter
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            const filtered = movies.filter(movie => 
-                movie.title.toLowerCase().includes(searchTerm) || 
-                movie.genre.toLowerCase().includes(searchTerm)
-            );
-            displayMovies(filtered);
-        });
-
-        // Video Modal Control
-        function openPlayer(trailerUrl, title = 'Avatar: The Way of Water', desc = '') {
-            const modal = document.getElementById('videoModal');
-            const iframe = document.getElementById('videoIframe');
+        // PLAYER CONTROLS
+        function openPlayer(url, title, desc) {
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalDesc').innerText = desc;
-            
-            iframe.src = trailerUrl + "?autoplay=1";
-            modal.style.display = 'flex';
+            document.getElementById('videoIframe').src = url + "?autoplay=1";
+            document.getElementById('playerModal').style.display = 'flex';
         }
 
         function closePlayer() {
-            const modal = document.getElementById('videoModal');
-            const iframe = document.getElementById('videoIframe');
-            iframe.src = '';
-            modal.style.display = 'none';
+            document.getElementById('videoIframe').src = '';
+            document.getElementById('playerModal').style.display = 'none';
         }
 
-        // Initialize display
-        displayMovies(movies);
+        // INITIALIZE ALL SLIDERS
+        renderSlider(shortTV, 'shortTvSlider');
+        renderSlider(swahiliMovies, 'swahiliSlider');
+        renderSlider(trendingMovies, 'trendingSlider');
+        renderSlider(hollywoodMovies, 'hollywoodSlider');
+        renderSlider(animeList, 'animeSlider');
     </script>
 </body>
 </html>
